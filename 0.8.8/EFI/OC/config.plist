@@ -25,7 +25,7 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>change Name(_PRW) to ZPRW</string>
+                    <string>change Name(XHC_PRW) to ZPRW</string>
                     <key>Count</key>
                     <integer>1</integer>
                     <key>Enabled</key>
