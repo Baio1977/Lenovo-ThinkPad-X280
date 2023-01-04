@@ -96,7 +96,7 @@ Bios: 1.49
  
 ## Not Tested:
 
-## Map USB:
+## Video Output:
 
 ![Lenovo](./Screenshot/4.png)
 
