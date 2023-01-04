@@ -104,6 +104,10 @@ Bios: 1.49
 
 ![Lenovo](./Screenshot/4.png)
 
+## Trackpad setup:
+
+![Lenovo](./Screenshot/10.png)
+
 ## SSDT Full Hack
 
 ![Lenovo](./Screenshot/5.png)
