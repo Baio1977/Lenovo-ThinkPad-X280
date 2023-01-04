@@ -11,8 +11,6 @@
  
 ## Specification:
 
-Bios: 1.49
-
 - CPU: Intel Core i5-8250u (KabyLake -r) @ 1.60GHz
 - Memory: 1x 8GB DDR4 2666Mhz
 - Harddrive: 1x 256 PCIe NVMe
@@ -34,6 +32,8 @@ Bios: 1.49
  
 
 ## BIOS Settings:
+
+Bios: 1.49
 
 - Under Config Tap
 
