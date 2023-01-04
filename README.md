@@ -96,6 +96,10 @@ Bios: 1.49
  
 ## Not Tested:
 
+## USB Map:
+
+![Lenovo](./Screenshot/3.png)
+
 ## Video Output:
 
 ![Lenovo](./Screenshot/4.png)
@@ -108,7 +112,9 @@ Bios: 1.49
 ## YogaSMC Panel
 
 ![Lenovo](./Screenshot/7.png)
+
 ![Lenovo](./Screenshot/8.png)
+
 ![Lenovo](./Screenshot/9.png) 
 
 ## Credits
