@@ -37,10 +37,10 @@
 			<key>IOProviderClass</key>
 			<string>AppleUSBXHCISPTLP</string>
 			<key>IOProviderMergeProperties</key>
-			<dict>			
+			<dict>				
 				<key>port-count</key>
 				<data>
-				EgAAAA==
+				EQAAAA==
 				</data>
 				<key>ports</key>
 				<dict>
@@ -209,30 +209,19 @@
 						EQAAAA==
 						</data>
 					</dict>
-					<key>SS06</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>name</key>
-						<string>SS06</string>
-						<key>port</key>
-						<data>
-						EgAAAA==
-						</data>
-					</dict>
 				</dict>
 			</dict>
 			<key>model</key>
 			<string>MacBookPro15,2</string>
 		</dict>
-		<key>MacBookPro15,2-XHC-8086_15c1</key>
+		<key>MacBookPro15,2-XHC2</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.apple.driver.AppleUSBMergeNub</string>
 			<key>IOClass</key>
 			<string>AppleUSBMergeNub</string>
 			<key>IONameMatch</key>
-			<string>XHC</string>
+			<string>XHC2</string>
 			<key>IOPCIPrimaryMatch</key>
 			<string>0x15c18086</string>
 			<key>IOProbeScore</key>
@@ -255,18 +244,18 @@
 						<string>HS01</string>
 						<key>port</key>
 						<data>
-						AQAAAA==
+						AwAAAA==
 						</data>
 					</dict>
-					<key>SS01</key>
+					<key>SSP1</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>9</integer>
 						<key>name</key>
-						<string>SS01</string>
+						<string>SSP1</string>
 						<key>port</key>
 						<data>
-						AwAAAA==
+						AQAAAA==
 						</data>
 					</dict>
 				</dict>
