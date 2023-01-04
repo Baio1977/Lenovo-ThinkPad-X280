@@ -68,11 +68,11 @@ Bios: 1.49
 
     Thunderbolt BIOS Assist Mode`-> UEFI Only
    
-       Wake by Thunderbolt(TM) -> No
+    Wake by Thunderbolt(TM) -> No
    
-       Security Level`-> No
+    Security Level`-> No
    
-       Support in Pre Boot Environment > Thunderbolt(TM) device`-> No
+    Support in Pre Boot Environment > Thunderbolt(TM) device`-> No
    
 ## Working:
 
