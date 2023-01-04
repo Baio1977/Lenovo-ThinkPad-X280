@@ -63,7 +63,17 @@ Bios: 1.49
     UEFI/Legacy Boot ->UEFI Only
 
        CSM Support -> No 
+	   
+- Under Thunderbolt menu
 
+    Thunderbolt BIOS Assist Mode`-> UEFI Only
+   
+       Wake by Thunderbolt(TM) -> No
+   
+       Security Level`-> No
+   
+       Support in Pre Boot Environment > Thunderbolt(TM) device`-> No
+   
 ## Working:
 
  - Keyboard (including all Fn keys)
