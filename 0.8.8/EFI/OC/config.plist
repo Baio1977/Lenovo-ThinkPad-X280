@@ -25,7 +25,7 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>change Name(XHC_PRW) to ZPRW</string>
+                    <string>Change Name(XHC_PRW) to ZPRW</string>
                     <key>Count</key>
                     <integer>1</integer>
                     <key>Enabled</key>
@@ -55,7 +55,7 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>change Method(GPRW,2,N) to XPRW, pair with SSDT-PRW.aml</string>
+                    <string>Change Method(GPRW,2,N) to XPRW, pair with SSDT-PRW.aml</string>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
@@ -299,7 +299,7 @@
                     <key>AAPL,ig-platform-id</key>
                     <data>AADAhw==</data>
                     <key>device-id</key>
-                    <data>wIcAAA==</data>
+                    <data>FlkAAA==</data>
                     <key>device_type</key>
                     <string>VGA compatible controller</string>
                     <key>enable-backlight-registers-fix</key>
@@ -323,7 +323,7 @@
                     <key>framebuffer-stolenmem</key>
                     <data>AAAwAQ==</data>
                     <key>model</key>
-                    <string>Intel HD Graphics 620</string>
+                    <string>Intel UHD Graphics 620</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x4,0x0)</key>
                 <dict>
@@ -556,42 +556,6 @@
                     <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/NVMeFix</string>
-                    <key>MaxKernel</key>
-                    <string></string>
-                    <key>MinKernel</key>
-                    <string></string>
-                    <key>PlistPath</key>
-                    <string>Contents/Info.plist</string>
-                </dict>
-                <dict>
-                    <key>Arch</key>
-                    <string>Any</string>
-                    <key>BundlePath</key>
-                    <string>RealtekCardReader.kext</string>
-                    <key>Comment</key>
-                    <string>V0.9.7</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>ExecutablePath</key>
-                    <string>Contents/MacOS/RealtekCardReader</string>
-                    <key>MaxKernel</key>
-                    <string></string>
-                    <key>MinKernel</key>
-                    <string></string>
-                    <key>PlistPath</key>
-                    <string>Contents/Info.plist</string>
-                </dict>
-                <dict>
-                    <key>Arch</key>
-                    <string>Any</string>
-                    <key>BundlePath</key>
-                    <string>RealtekCardReaderFriend.kext</string>
-                    <key>Comment</key>
-                    <string>V1.0.4</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>ExecutablePath</key>
-                    <string>Contents/MacOS/RealtekCardReaderFriend</string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -1104,7 +1068,7 @@
                 <key>AdviseFeatures</key>
                 <true/>
                 <key>MLB</key>
-                <string>C02939303QXJH4R1F</string>
+                <string>C020364054NJH4R1F</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
@@ -1118,9 +1082,9 @@
                 <key>SystemProductName</key>
                 <string>MacBookPro15,2</string>
                 <key>SystemSerialNumber</key>
-                <string>C02ZG0BVJHCC</string>
+                <string>C02DCZZWJHCC</string>
                 <key>SystemUUID</key>
-                <string>46A3AD0D-0DF1-469E-A7A3-F8ACF6E821C0</string>
+                <string>60FDF98A-3E01-45D8-919E-08AE538D108A</string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>
