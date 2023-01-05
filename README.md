@@ -96,6 +96,10 @@ Bios: 1.49
  
 ## Not Tested:
 
+## Map USB:
+
+![Lenovo](./Screenshot/4.png)
+
 ## SSDT Full Hack
 
 ![Lenovo](./Screenshot/5.png)
