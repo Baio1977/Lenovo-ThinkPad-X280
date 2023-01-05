@@ -95,8 +95,8 @@ Bios: 1.49
 ## YogaSMC Panel
 
 ![Lenovo](./Screenshot/7.png)
-![Lenovo](./Screenshot/5.png)
-![Lenovo](./Screenshot/6.png) 
+![Lenovo](./Screenshot/8.png)
+![Lenovo](./Screenshot/9.png) 
 
 ## Credits
 
