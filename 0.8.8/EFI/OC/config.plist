@@ -302,8 +302,6 @@
                     <data>FlkAAA==</data>
                     <key>device_type</key>
                     <string>VGA compatible controller</string>
-                    <key>enable-backlight-registers-fix</key>
-                    <data>AQAAAA==</data>
                     <key>enable-hdmi-dividers-fix</key>
                     <data>AQAAAA==</data>
                     <key>enable-hdmi20</key>
