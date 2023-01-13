@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLl80wYq.aml, Wed Jan  4 14:57:32 2023
+ * Disassembly of iASL5DJqvA.aml, Fri Jan 13 07:56:15 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000C8E (3214)
+ *     Length           0x00000BF6 (3062)
  *     Revision         0x02
- *     Checksum         0x2D
+ *     Checksum         0x97
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280"
  *     OEM Revision     0x00000000 (0)
@@ -38,7 +38,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
     External (_SB_.PCI0.RP01.HRUS, DeviceObj)
     External (_SB_.PCI0.RP01.PXSX, DeviceObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
-    External (DPTF, IntObj)
     External (HPTE, FieldUnitObj)
     External (HRUS, IntObj)
     External (LNUX, IntObj)
@@ -52,8 +51,8 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
         If (_OSI ("Darwin"))
         {
             HPTE = Zero
+            LNUX = One
             WNTF = One
-            DPTF = Zero
             OSYS = 0x07DF
         }
 
@@ -453,21 +452,21 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                         Return (Package (0x11)
                                         {
                                             "AAPL,slot-name", 
-                                            Buffer (0x0C)
+                                            Buffer (0x07)
                                             {
-                                                "Thunderbolt"
+                                                "Slot-1"
                                             }, 
 
                                             "name", 
-                                            Buffer (0x23)
+                                            Buffer (0x24)
                                             {
-                                                "Titan Ridge Thunderbolt Controller"
+                                                "Alpine Ridge Thunderbolt Controller"
                                             }, 
 
                                             "model", 
-                                            Buffer (0x2C)
+                                            Buffer (0x2D)
                                             {
-                                                "Intel JHL7540 Titan Ridge Thunderbolt 3 NHI"
+                                                "Intel JHL6540 Alpine Ridge Thunderbolt 3 NHI"
                                             }, 
 
                                             "device_type", 
@@ -477,21 +476,23 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                             }, 
 
                                             "ThunderboltDROM", 
-                                            Buffer (0x65)
+                                            Buffer (0x72)
                                             {
-                                                /* 0000 */  0x5B, 0x00, 0xF2, 0xEE, 0x21, 0x8B, 0xF4, 0x20,  // [...!.. 
-                                                /* 0008 */  0x18, 0xFA, 0x28, 0x71, 0x10, 0x01, 0x58, 0x00,  // ..(q..X.
-                                                /* 0010 */  0x27, 0x01, 0x11, 0x20, 0x01, 0x01, 0x08, 0x81,  // '.. ....
+                                                /* 0000 */  0x0F, 0x00, 0x7E, 0x4A, 0x1C, 0x05, 0xB5, 0x19,  // ..~J....
+                                                /* 0008 */  0xEE, 0xF5, 0x89, 0x28, 0xC6, 0x01, 0x65, 0x00,  // ...(..e.
+                                                /* 0010 */  0x09, 0x01, 0x06, 0x17, 0x01, 0x2B, 0x08, 0x81,  // .....+..
                                                 /* 0018 */  0x80, 0x02, 0x80, 0x00, 0x00, 0x00, 0x08, 0x82,  // ........
-                                                /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x02, 0xC3,  // ........
-                                                /* 0028 */  0x02, 0xC4, 0x05, 0x85, 0x50, 0x00, 0x00, 0x05,  // ....P...
-                                                /* 0030 */  0x86, 0x50, 0x00, 0x00, 0x02, 0x87, 0x0B, 0x88,  // .P......
-                                                /* 0038 */  0x20, 0x01, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00,  //  ..d....
-                                                /* 0040 */  0x00, 0x03, 0x89, 0x80, 0x02, 0xCA, 0x02, 0xCB,  // ........
-                                                /* 0048 */  0x08, 0x01, 0x52, 0x61, 0x7A, 0x65, 0x72, 0x00,  // ..Razer.
-                                                /* 0050 */  0x15, 0x02, 0x42, 0x6C, 0x61, 0x64, 0x65, 0x31,  // ..Blade1
-                                                /* 0058 */  0x35, 0x20, 0x42, 0x61, 0x73, 0x65, 0x20, 0x4D,  // 5 Base M
-                                                /* 0060 */  0x6F, 0x64, 0x65, 0x6C, 0x00                     // odel.
+                                                /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x08, 0x83,  // ........
+                                                /* 0028 */  0x80, 0x04, 0x80, 0x01, 0x00, 0x00, 0x08, 0x84,  // ........
+                                                /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x02, 0x85,  // ........
+                                                /* 0038 */  0x0B, 0x86, 0x20, 0x01, 0x00, 0x64, 0x00, 0x00,  // .. ..d..
+                                                /* 0040 */  0x00, 0x00, 0x00, 0x02, 0x87, 0x05, 0x88, 0x50,  // .......P
+                                                /* 0048 */  0x40, 0x00, 0x05, 0x89, 0x50, 0x00, 0x00, 0x05,  // @...P...
+                                                /* 0050 */  0x8A, 0x50, 0x00, 0x00, 0x05, 0x8B, 0x50, 0x40,  // .P....P@
+                                                /* 0058 */  0x00, 0x09, 0x01, 0x4C, 0x65, 0x6E, 0x6F, 0x76,  // ...Lenov
+                                                /* 0060 */  0x6F, 0x00, 0x10, 0x02, 0x54, 0x68, 0x69, 0x6E,  // o...Thin
+                                                /* 0068 */  0x6B, 0x50, 0x61, 0x64, 0x20, 0x58, 0x32, 0x38,  // kPad X28
+                                                /* 0070 */  0x30, 0x00                                       // 0.
                                             }, 
 
                                             "ThunderboltConfig", 
@@ -611,9 +612,9 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                         Return (Package (0x18)
                                         {
                                             "AAPL,slot-name", 
-                                            Buffer (0x0C)
+                                            Buffer (0x07)
                                             {
-                                                "Thunderbolt"
+                                                "Slot-1"
                                             }, 
 
                                             "built-in", 
@@ -623,15 +624,15 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                             }, 
 
                                             "name", 
-                                            Buffer (0x1F)
+                                            Buffer (0x20)
                                             {
-                                                "Titan Ridge USB 3.1 Controller"
+                                                "Alpine Ridge USB 3.1 Controller"
                                             }, 
 
                                             "model", 
-                                            Buffer (0x22)
+                                            Buffer (0x23)
                                             {
-                                                "Intel JHL7540 Titan Ridge USB 3.1"
+                                                "Intel JHL6540 Alpine Ridge USB 3.1"
                                             }, 
 
                                             "device_type", 
@@ -659,9 +660,9 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                             Return (Zero)
                                         }
 
-                                        Device (HS01)
+                                        Device (HSP1)
                                         {
-                                            Name (_ADR, 0x03)  // _ADR: Address
+                                            Name (_ADR, One)  // _ADR: Address
                                             Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                                             {
                                                 0xFF, 
@@ -705,7 +706,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                         Device (SSP1)
                                         {
-                                            Name (_ADR, One)  // _ADR: Address
+                                            Name (_ADR, 0x03)  // _ADR: Address
                                             Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                                             {
                                                 0xFF, 
@@ -755,47 +756,16 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                     })
                                                 }
 
-                                                Return (Package (0x02)
+                                                Return (Package (0x04)
                                                 {
                                                     "UsbCPortNumber", 
+                                                    One, 
+                                                    "UsbPowerSource", 
                                                     One
                                                 })
                                             }
                                         }
                                     }
-                                }
-                            }
-
-                            Device (DSB4)
-                            {
-                                Name (_ADR, 0x00040000)  // _ADR: Address
-                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
-                                Field (A1E0, ByteAcc, NoLock, Preserve)
-                                {
-                                    AVND,   32, 
-                                    BMIE,   3, 
-                                    Offset (0x18), 
-                                    PRIB,   8, 
-                                    SECB,   8, 
-                                    SUBB,   8, 
-                                    Offset (0x1E), 
-                                        ,   13, 
-                                    MABT,   1
-                                }
-
-                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
-                                {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB4.SECB */
-                                }
-
-                                Method (_STA, 0, NotSerialized)  // _STA: Status
-                                {
-                                    Return (0x0F)
-                                }
-
-                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                {
-                                    Return (Zero)
                                 }
                             }
                         }
@@ -869,35 +839,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                     }
                 }
             }
-        }
-
-        Method (DTGP, 5, NotSerialized)
-        {
-            If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
-            {
-                If ((Arg1 == One))
-                {
-                    If ((Arg2 == Zero))
-                    {
-                        Arg4 = Buffer (One)
-                            {
-                                 0x03                                             // .
-                            }
-                        Return (One)
-                    }
-
-                    If ((Arg2 == One))
-                    {
-                        Return (One)
-                    }
-                }
-            }
-
-            Arg4 = Buffer (One)
-                {
-                     0x00                                             // .
-                }
-            Return (Zero)
         }
 
         Method (GPRW, 2, NotSerialized)
