@@ -236,15 +236,15 @@
 				</data>
 				<key>ports</key>
 				<dict>
-					<key>HS01</key>
+					<key>HSP1</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>9</integer>
 						<key>name</key>
-						<string>HS01</string>
+						<string>HSP1</string>
 						<key>port</key>
 						<data>
-						AwAAAA==
+						AQAAAA==
 						</data>
 					</dict>
 					<key>SSP1</key>
@@ -255,7 +255,7 @@
 						<string>SSP1</string>
 						<key>port</key>
 						<data>
-						AQAAAA==
+						AwAAAA==
 						</data>
 					</dict>
 				</dict>
