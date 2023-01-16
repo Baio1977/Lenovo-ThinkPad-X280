@@ -14,9 +14,32 @@
                     <key>Path</key>
                     <string>SSDT-Thinkpad_X280.aml</string>
                 </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string></string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>DMAR_Mod.aml</string>
+                </dict>
             </array>
             <key>Delete</key>
-            <array/>
+            <array>
+                <dict>
+                    <key>All</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>SSDT-DMAR Disable</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>OemTableId</key>
+                    <data></data>
+                    <key>TableLength</key>
+                    <integer>0</integer>
+                    <key>TableSignature</key>
+                    <data>RE1BUg==</data>
+                </dict>
+            </array>
             <key>Patch</key>
             <array>
                 <dict>
@@ -150,8 +173,28 @@
         <dict>
             <key>Add</key>
             <dict>
+                <key>#PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/2,0</string>
+                    <key>device_type</key>
+                    <string>PCI bridge</string>
+                    <key>model</key>
+                    <string>JHL6240 Thunderbolt 3 DSB2 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
+                </dict>
+                <key>#PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)/Pci(0x0,0x0)</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/2,0/0,0</string>
+                    <key>device_type</key>
+                    <string>USB controller</string>
+                    <key>model</key>
+                    <string>JHL6240 Thunderbolt 3 XHC2 Controller (Low Power) [Alpine Ridge LP 2016]</string>
+                </dict>
                 <key>PciRoot(0x0)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,0,0</string>
                     <key>device_type</key>
                     <string>Host bridge</string>
                     <key>model</key>
@@ -159,6 +202,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x14,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,20,0</string>
                     <key>device_type</key>
                     <string>USB controller</string>
                     <key>model</key>
@@ -166,6 +211,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x14,0x2)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,20,2</string>
                     <key>device_type</key>
                     <string>Signal processing controller</string>
                     <key>model</key>
@@ -173,13 +220,17 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x16,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,22,0</string>
                     <key>device_type</key>
                     <string>Communication controller</string>
                     <key>model</key>
-                    <string>Sunrise Point-LP CSME IMEI</string>
+                    <string>Sunrise Point-LP CSME HECI #1</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
@@ -187,48 +238,44 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
+                    <string>JHL6240 Thunderbolt 3 USPB Bridge (Low Power) [Alpine Ridge LP 2016]</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/0,0</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
+                    <string>JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/0,0/0,0</string>
                     <key>device_type</key>
                     <string>System peripheral</string>
                     <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 NHI (Low Power) [Alpine Ridge LP 2016]</string>
+                    <string>JHL6240 Thunderbolt 3 NHI0 (Low Power) [Alpine Ridge LP 2016]</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x1,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/1,0</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
-                </dict>
-                <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)</key>
-                <dict>
-                    <key>device_type</key>
-                    <string>PCI bridge</string>
-                    <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
-                </dict>
-                <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)/Pci(0x0,0x0)</key>
-                <dict>
-                    <key>device_type</key>
-                    <string>USB controller</string>
-                    <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 USB 3.1 Controller (Low Power) [Alpine Ridge LP 2016]</string>
+                    <string>JHL6240 Thunderbolt 3 DSB1 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x2)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,2</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
@@ -236,6 +283,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x2)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,2/0,0</string>
                     <key>device_type</key>
                     <string>Network controller</string>
                     <key>model</key>
@@ -243,6 +292,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x4)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,4</string>
                     <key>device_type</key>
                     <string>PCI bridge</string>
                     <key>model</key>
@@ -250,6 +301,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,4/0,0</string>
                     <key>device_type</key>
                     <string>Non-Volatile memory controller</string>
                     <key>model</key>
@@ -257,6 +310,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,31,0</string>
                     <key>device_type</key>
                     <string>ISA bridge</string>
                     <key>model</key>
@@ -264,6 +319,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x2)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,31,2</string>
                     <key>device_type</key>
                     <string>Memory controller</string>
                     <key>model</key>
@@ -271,6 +328,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,31,3</string>
                     <key>device_type</key>
                     <string>Audio device</string>
                     <key>layout-id</key>
@@ -280,6 +339,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x4)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,31,4</string>
                     <key>device_type</key>
                     <string>SMBus</string>
                     <key>model</key>
@@ -287,6 +348,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x6)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,31,6</string>
                     <key>device_type</key>
                     <string>Ethernet controller</string>
                     <key>model</key>
@@ -294,16 +357,20 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
+                    <key>#enable-backlight-registers-fix</key>
+                    <data>AQAAAA==</data>
+                    <key>#enable-hdmi-dividers-fix</key>
+                    <data>AQAAAA==</data>
                     <key>AAPL,GfxYTile</key>
                     <data>AQAAAA==</data>
                     <key>AAPL,ig-platform-id</key>
                     <data>AADAhw==</data>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
                     <key>device-id</key>
                     <data>FlkAAA==</data>
                     <key>device_type</key>
                     <string>VGA compatible controller</string>
-                    <key>enable-hdmi-dividers-fix</key>
-                    <data>AQAAAA==</data>
                     <key>enable-hdmi20</key>
                     <data>AQAAAA==</data>
                     <key>framebuffer-con1-enable</key>
@@ -325,6 +392,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x4,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,4,0</string>
                     <key>device_type</key>
                     <string>Signal processing controller</string>
                     <key>model</key>
@@ -332,6 +401,8 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x8,0x0)</key>
                 <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,8,0</string>
                     <key>device_type</key>
                     <string>System peripheral</string>
                     <key>model</key>
@@ -522,6 +593,42 @@
                     <string></string>
                     <key>MinKernel</key>
                     <string>21.0.0</string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>CPUFriend.kext</string>
+                    <key>Comment</key>
+                    <string>V1.2.6</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/CPUFriend</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>CPUFriendDataProvider.kext</string>
+                    <key>Comment</key>
+                    <string>V1.0.1</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string></string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
@@ -727,6 +834,24 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
+                    <string>IOElectrify.kext</string>
+                    <key>Comment</key>
+                    <string>V1.0.0</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/IOElectrify</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
                     <string>AirportItlwm_Ventura.kext</string>
                     <key>Comment</key>
                     <string>V2.2.0</string>
@@ -812,7 +937,7 @@
                 <key>CustomSMBIOSGuid</key>
                 <true/>
                 <key>DisableIoMapper</key>
-                <true/>
+                <false/>
                 <key>DisableLinkeditJettison</key>
                 <true/>
                 <key>DisableRtcChecksum</key>
@@ -875,7 +1000,7 @@
                 <key>LauncherPath</key>
                 <string>Default</string>
                 <key>PickerAttributes</key>
-                <integer>17</integer>
+                <integer>155</integer>
                 <key>PickerAudioAssist</key>
                 <false/>
                 <key>PickerMode</key>
@@ -889,14 +1014,14 @@
                 <key>TakeoffDelay</key>
                 <integer>0</integer>
                 <key>Timeout</key>
-                <integer>3</integer>
+                <integer>5</integer>
             </dict>
             <key>Debug</key>
             <dict>
                 <key>AppleDebug</key>
                 <false/>
                 <key>ApplePanic</key>
-                <false/>
+                <true/>
                 <key>DisableWatchDog</key>
                 <true/>
                 <key>DisplayDelay</key>
@@ -908,7 +1033,7 @@
                 <key>SysReport</key>
                 <false/>
                 <key>Target</key>
-                <integer>0</integer>
+                <integer>3</integer>
             </dict>
             <key>Entries</key>
             <array/>
@@ -1066,13 +1191,13 @@
                 <key>AdviseFeatures</key>
                 <true/>
                 <key>MLB</key>
-                <string>C020364054NJH4R1F</string>
+                <string>C02831130J9JH4RCB</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
                 <integer>0</integer>
                 <key>ROM</key>
-                <data>33i+tbVZ</data>
+                <data>YbiyxFTF</data>
                 <key>SpoofVendor</key>
                 <false/>
                 <key>SystemMemoryStatus</key>
@@ -1080,9 +1205,9 @@
                 <key>SystemProductName</key>
                 <string>MacBookPro15,2</string>
                 <key>SystemSerialNumber</key>
-                <string>C02DCZZWJHCC</string>
+                <string>C02X5EZZJHCC</string>
                 <key>SystemUUID</key>
-                <string>60FDF98A-3E01-45D8-919E-08AE538D108A</string>
+                <string>06B2DBD6-D48E-41BD-A732-FE2327EE8748</string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>

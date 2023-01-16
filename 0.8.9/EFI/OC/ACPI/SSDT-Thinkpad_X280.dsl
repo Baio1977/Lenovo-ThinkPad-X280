@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASL5DJqvA.aml, Fri Jan 13 07:56:15 2023
+ * Disassembly of iASLNmW9Ow.aml, Mon Jan 16 06:54:57 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000BF6 (3062)
+ *     Length           0x00000E24 (3620)
  *     Revision         0x02
- *     Checksum         0x97
+ *     Checksum         0x2B
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280"
  *     OEM Revision     0x00000000 (0)
@@ -337,31 +337,37 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                             {
-                                If ((Arg2 == Zero))
-                                {
-                                    Return (Buffer (One)
+                                Local0 = Package (0x0A)
                                     {
-                                         0x03                                             // .
-                                    })
-                                }
+                                        "AAPL,slot-name", 
+                                        Buffer (0x0C)
+                                        {
+                                            "Thunderbolt"
+                                        }, 
 
-                                Return (Package (0x06)
-                                {
-                                    "AAPL,slot-name", 
-                                    Buffer (0x0C)
-                                    {
-                                        "Thunderbolt"
-                                    }, 
+                                        "built-in", 
+                                        Buffer (One)
+                                        {
+                                             0x00                                             // .
+                                        }, 
 
-                                    "built-in", 
-                                    Buffer (One)
-                                    {
-                                         0x00                                             // .
-                                    }, 
+                                        "model", 
+                                        Buffer (0x45)
+                                        {
+                                            "JHL6240 Thunderbolt 3 UPSB Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                        }, 
 
-                                    "PCI-Thunderbolt", 
-                                    One
-                                })
+                                        "device_type", 
+                                        Buffer (0x0B)
+                                        {
+                                            "PCI bridge"
+                                        }, 
+
+                                        "PCI-Thunderbolt", 
+                                        One
+                                    }
+                                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                Return (Local0)
                             }
 
                             Device (DSB0)
@@ -398,31 +404,37 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                 {
-                                    If ((Arg2 == Zero))
-                                    {
-                                        Return (Buffer (One)
+                                    Local0 = Package (0x0A)
                                         {
-                                             0x03                                             // .
-                                        })
-                                    }
+                                            "AAPL,slot-name", 
+                                            Buffer (0x0C)
+                                            {
+                                                "Thunderbolt"
+                                            }, 
 
-                                    Return (Package (0x06)
-                                    {
-                                        "AAPL,slot-name", 
-                                        Buffer (0x0C)
-                                        {
-                                            "Thunderbolt"
-                                        }, 
+                                            "built-in", 
+                                            Buffer (One)
+                                            {
+                                                 0x00                                             // .
+                                            }, 
 
-                                        "built-in", 
-                                        Buffer (One)
-                                        {
-                                             0x00                                             // .
-                                        }, 
+                                            "model", 
+                                            Buffer (0x45)
+                                            {
+                                                "JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                            }, 
 
-                                        "PCIHotplugCapable", 
-                                        Zero
-                                    })
+                                            "device_type", 
+                                            Buffer (0x0B)
+                                            {
+                                                "PCI bridge"
+                                            }, 
+
+                                            "PCIHotplugCapable", 
+                                            Zero
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
                                 }
 
                                 Device (NHI0)
@@ -441,82 +453,94 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                     {
-                                        If ((Arg2 == Zero))
-                                        {
-                                            Return (Buffer (One)
+                                        Local0 = Package (0x19)
                                             {
-                                                 0x03                                             // .
-                                            })
-                                        }
+                                                "AAPL,slot-name", 
+                                                Buffer (0x0C)
+                                                {
+                                                    "Thunderbolt"
+                                                }, 
 
-                                        Return (Package (0x11)
-                                        {
-                                            "AAPL,slot-name", 
-                                            Buffer (0x07)
-                                            {
-                                                "Slot-1"
-                                            }, 
+                                                "name", 
+                                                Buffer (0x24)
+                                                {
+                                                    "Alpine Ridge Thunderbolt Controller"
+                                                }, 
 
-                                            "name", 
-                                            Buffer (0x24)
-                                            {
-                                                "Alpine Ridge Thunderbolt Controller"
-                                            }, 
+                                                "model", 
+                                                Buffer (0x3E)
+                                                {
+                                                    "JHL6240 Thunderbolt 3 NHI0 (Low Power) [Alpine Ridge LP 2016]"
+                                                }, 
 
-                                            "model", 
-                                            Buffer (0x2D)
-                                            {
-                                                "Intel JHL6540 Alpine Ridge Thunderbolt 3 NHI"
-                                            }, 
+                                                "device_type", 
+                                                Buffer (0x12)
+                                                {
+                                                    "System peripheral"
+                                                }, 
 
-                                            "device_type", 
-                                            Buffer (0x17)
-                                            {
-                                                "Thunderbolt-Controller"
-                                            }, 
+                                                "ThunderboltDROM", 
+                                                Buffer (0x65)
+                                                {
+                                                    /* 0000 */  0x63, 0x00, 0x06, 0xBB, 0xAD, 0xA2, 0x93, 0x78,  // c......x
+                                                    /* 0008 */  0x2D, 0xF4, 0x15, 0x15, 0x66, 0x01, 0x58, 0x00,  // -...f.X.
+                                                    /* 0010 */  0x01, 0x00, 0x10, 0x00, 0x01, 0x00, 0x08, 0x81,  // ........
+                                                    /* 0018 */  0x80, 0x02, 0x80, 0x00, 0x00, 0x00, 0x08, 0x82,  // ........
+                                                    /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x08, 0x83,  // ........
+                                                    /* 0028 */  0x80, 0x04, 0x80, 0x01, 0x00, 0x00, 0x08, 0x84,  // ........
+                                                    /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x05, 0x85,  // ........
+                                                    /* 0038 */  0x09, 0x01, 0x00, 0x05, 0x86, 0x09, 0x01, 0x00,  // ........
+                                                    /* 0040 */  0x02, 0x87, 0x03, 0x88, 0x20, 0x03, 0x89, 0x80,  // .... ...
+                                                    /* 0048 */  0x02, 0xCA, 0x02, 0xCB, 0x12, 0x01, 0x4C, 0x65,  // ......Le
+                                                    /* 0050 */  0x6E, 0x6F, 0x76, 0x6F, 0x20, 0x54, 0x68, 0x69,  // novo Thi
+                                                    /* 0058 */  0x6E, 0x6B, 0x70, 0x61, 0x64, 0x00, 0x07, 0x02,  // nkpad...
+                                                    /* 0060 */  0x58, 0x32, 0x38, 0x30, 0x00                     // X280.
+                                                }, 
 
-                                            "ThunderboltDROM", 
-                                            Buffer (0x72)
-                                            {
-                                                /* 0000 */  0x0F, 0x00, 0x7E, 0x4A, 0x1C, 0x05, 0xB5, 0x19,  // ..~J....
-                                                /* 0008 */  0xEE, 0xF5, 0x89, 0x28, 0xC6, 0x01, 0x65, 0x00,  // ...(..e.
-                                                /* 0010 */  0x09, 0x01, 0x06, 0x17, 0x01, 0x2B, 0x08, 0x81,  // .....+..
-                                                /* 0018 */  0x80, 0x02, 0x80, 0x00, 0x00, 0x00, 0x08, 0x82,  // ........
-                                                /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x08, 0x83,  // ........
-                                                /* 0028 */  0x80, 0x04, 0x80, 0x01, 0x00, 0x00, 0x08, 0x84,  // ........
-                                                /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x02, 0x85,  // ........
-                                                /* 0038 */  0x0B, 0x86, 0x20, 0x01, 0x00, 0x64, 0x00, 0x00,  // .. ..d..
-                                                /* 0040 */  0x00, 0x00, 0x00, 0x02, 0x87, 0x05, 0x88, 0x50,  // .......P
-                                                /* 0048 */  0x40, 0x00, 0x05, 0x89, 0x50, 0x00, 0x00, 0x05,  // @...P...
-                                                /* 0050 */  0x8A, 0x50, 0x00, 0x00, 0x05, 0x8B, 0x50, 0x40,  // .P....P@
-                                                /* 0058 */  0x00, 0x09, 0x01, 0x4C, 0x65, 0x6E, 0x6F, 0x76,  // ...Lenov
-                                                /* 0060 */  0x6F, 0x00, 0x10, 0x02, 0x54, 0x68, 0x69, 0x6E,  // o...Thin
-                                                /* 0068 */  0x6B, 0x50, 0x61, 0x64, 0x20, 0x58, 0x32, 0x38,  // kPad X28
-                                                /* 0070 */  0x30, 0x00                                       // 0.
-                                            }, 
+                                                "ThunderboltConfig", 
+                                                Buffer (0x20)
+                                                {
+                                                    /* 0000 */  0x00, 0x02, 0x1C, 0x00, 0x02, 0x00, 0x05, 0x03,  // ........
+                                                    /* 0008 */  0x01, 0x00, 0x04, 0x00, 0x05, 0x03, 0x02, 0x00,  // ........
+                                                    /* 0010 */  0x03, 0x00, 0x05, 0x03, 0x01, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0018 */  0x03, 0x03, 0x02, 0x00, 0x01, 0x00, 0x02, 0x00   // ........
+                                                }, 
 
-                                            "ThunderboltConfig", 
-                                            Buffer (0x20)
-                                            {
-                                                /* 0000 */  0x00, 0x02, 0x1C, 0x00, 0x02, 0x00, 0x05, 0x03,  // ........
-                                                /* 0008 */  0x01, 0x00, 0x04, 0x00, 0x05, 0x03, 0x02, 0x00,  // ........
-                                                /* 0010 */  0x03, 0x00, 0x05, 0x03, 0x01, 0x00, 0x00, 0x00,  // ........
-                                                /* 0018 */  0x03, 0x03, 0x02, 0x00, 0x01, 0x00, 0x02, 0x00   // ........
-                                            }, 
+                                                "linkDetails", 
+                                                Buffer (0x08)
+                                                {
+                                                     0x08, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00   // ........
+                                                }, 
 
-                                            "linkDetails", 
-                                            Buffer (0x08)
-                                            {
-                                                 0x08, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00   // ........
-                                            }, 
+                                                "TBTFlags", 
+                                                Buffer (0x04)
+                                                {
+                                                     0x03, 0x00, 0x00, 0x00                           // ....
+                                                }, 
 
-                                            "power-save", 
-                                            One, 
-                                            Buffer (One)
-                                            {
-                                                 0x00                                             // .
+                                                "ThunderboltUUID", 
+                                                ToUUID ("95e6bcfa-5a4a-5f81-b3d2-f0e4bd35cf1e") /* Unknown UUID */, 
+                                                "sscOffset", 
+                                                Buffer (0x02)
+                                                {
+                                                     0x00, 0x00                                       // ..
+                                                }, 
+
+                                                "TBTDPLowToHigh", 
+                                                Buffer (0x04)
+                                                {
+                                                     0x01, 0x00, 0x00, 0x00                           // ....
+                                                }, 
+
+                                                "power-save", 
+                                                One, 
+                                                Buffer (One)
+                                                {
+                                                     0x00                                             // .
+                                                }
                                             }
-                                        })
+                                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                        Return (Local0)
                                     }
                                 }
                             }
@@ -586,6 +610,17 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     Return (Zero)
                                 }
 
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x02)
+                                        {
+                                            "PCIHotplugCapable", 
+                                            Zero
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
@@ -599,57 +634,58 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                         Return (Zero)
                                     }
 
-                                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                                    {
-                                        If ((Arg2 == Zero))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x03                                             // .
-                                            })
-                                        }
-
-                                        Return (Package (0x18)
-                                        {
-                                            "AAPL,slot-name", 
-                                            Buffer (0x07)
-                                            {
-                                                "Slot-1"
-                                            }, 
-
-                                            "built-in", 
-                                            Buffer (One)
-                                            {
-                                                 0x00                                             // .
-                                            }, 
-
-                                            "name", 
-                                            Buffer (0x20)
-                                            {
-                                                "Alpine Ridge USB 3.1 Controller"
-                                            }, 
-
-                                            "model", 
-                                            Buffer (0x23)
-                                            {
-                                                "Intel JHL6540 Alpine Ridge USB 3.1"
-                                            }, 
-
-                                            "device_type", 
-                                            Buffer (0x1F)
-                                            {
-                                                "USB eXtensible Host-Controller"
-                                            }
-                                        })
-                                    }
-
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                                     {
                                         Return (Package (0x02)
                                         {
-                                            0x6D, 
+                                            0x69, 
                                             0x03
                                         })
+                                    }
+
+                                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                    {
+                                        Local0 = Package (0x10)
+                                            {
+                                                "AAPL,slot-name", 
+                                                Buffer (0x11)
+                                                {
+                                                    "Thunderbolt-XHC2"
+                                                }, 
+
+                                                "built-in", 
+                                                Buffer (One)
+                                                {
+                                                     0x00                                             // .
+                                                }, 
+
+                                                "name", 
+                                                Buffer (0x20)
+                                                {
+                                                    "Alpine Ridge USB 3.1 Controller"
+                                                }, 
+
+                                                "model", 
+                                                Buffer (0x53)
+                                                {
+                                                    "JHL6240 Thunderbolt 3 USB 3.1 [XHC2] Controller (Low Power) [Alpine Ridge LP 2016]"
+                                                }, 
+
+                                                "device_type", 
+                                                Buffer (0x0F)
+                                                {
+                                                    "USB controller"
+                                                }, 
+
+                                                "USBBusNumber", 
+                                                Zero, 
+                                                "UsbCompanionControllerPresent", 
+                                                One, 
+                                                "AAPL,XHC-clock-id", 
+                                                One
+                                            }
+                                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                        Return (Local0)
                                     }
 
                                     Device (RHUB)
@@ -760,7 +796,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                 {
                                                     "UsbCPortNumber", 
                                                     One, 
-                                                    "UsbPowerSource", 
+                                                    "UsbCompanionPortPresent", 
                                                     One
                                                 })
                                             }
@@ -818,7 +854,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                         })
                     }
 
-                    Return (Package (0x04)
+                    Return (Package (0x06)
                     {
                         "kUSBSleepPortCurrentLimit", 
                         0x0BB8, 
@@ -839,6 +875,35 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                     }
                 }
             }
+        }
+
+        Method (DTGP, 5, NotSerialized)
+        {
+            If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+            {
+                If ((Arg1 == One))
+                {
+                    If ((Arg2 == Zero))
+                    {
+                        Arg4 = Buffer (One)
+                            {
+                                 0x03                                             // .
+                            }
+                        Return (One)
+                    }
+
+                    If ((Arg2 == One))
+                    {
+                        Return (One)
+                    }
+                }
+            }
+
+            Arg4 = Buffer (One)
+                {
+                     0x00                                             // .
+                }
+            Return (Zero)
         }
 
         Method (GPRW, 2, NotSerialized)
