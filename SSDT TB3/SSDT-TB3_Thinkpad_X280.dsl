@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLQTlepF.aml, Tue Jan 17 15:55:58 2023
+ * Disassembly of iASLLdiOet.aml, Tue Jan 17 18:21:23 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000A40 (2624)
+ *     Length           0x00000A1A (2586)
  *     Revision         0x02
- *     Checksum         0xE8
+ *     Checksum         0x94
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280TB3"
  *     OEM Revision     0x00000000 (0)
@@ -198,11 +198,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
                                     Name (_STR, Unicode ("Thunderbolt"))  // _STR: Description String
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                                    {
-                                        Return (0x0F)
-                                    }
-
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
                                         Return (Zero)
@@ -456,16 +451,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                                    {
-                                        Return (0x0F)
-                                    }
-
-                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                    {
-                                        Return (Zero)
-                                    }
-
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                                     {
                                         Return (Package (0x02)
@@ -523,11 +508,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                     Device (RHUB)
                                     {
                                         Name (_ADR, Zero)  // _ADR: Address
-                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                        {
-                                            Return (Zero)
-                                        }
-
                                         Device (HSP1)
                                         {
                                             Name (_ADR, One)  // _ADR: Address
