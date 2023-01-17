@@ -113,7 +113,7 @@ Bios: 1.49
 ![Lenovo](./Screenshot/5.png)
 ![Lenovo](./Screenshot/6.png)
 
-TB3 Patch ACPI
+SSDT TB3 : bundled with _DSM with real Mac device properties
 
 ```
     Scope (\)
