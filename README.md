@@ -31,47 +31,40 @@
 - RJ45 Gigabit Ethernet I219-LM
  
 
-## BIOS Settings:
+## BIOS Settings:V 1.49
 
-Bios: 1.49
+The bios must be properly configured prior to installing macOS.
+In Security menu, set the following settings:
 
+-  `Security > Security Chip`: must be **Disabled**
+-  `Memory Protection > Execution Prevention`: must be **Enabled**
+-  `Virtualization > Intel Virtualization Technology`: must be **Enabled**
+-  `Virtualization > Intel VT-d Feature`: must be **Enabled**
+-  `Anti-Theft > Computrace -> Current Setting`: must be **Disabled**
+-  `Secure Boot > Secure Boot`: must be **Disabled**
+-  `Intel SGX -> Intel SGX Control`: must be **Disabled**
+-  `Device Guard`: must be **Disabled**
+
+In Startup menu, set the following options:
+
+-  `UEFI/Legacy Boot`: **UEFI Only**
+-  `CSM Support`: **No**
+
+In Thunderbolt menu, set the following options:
+
+-  `Thunderbolt BIOS Assist Mode`: **UEFI Only**
+-  `Wake by Thunderbolt(TM) 3`: **No**
+-  `Security Level`: **No**
+-  `Support in Pre Boot Environment > Thunderbolt(TM) device`: **No**
 - Under Config Tap
 
-    Display
-
-       Boot Display Device -> Thinkpad LCD
-
-       Shared Display Priority -> USB Type-C
-
-       Total Garphics Memory ->256MB
-
-       Boot Time Extension -> Disabled
-
-- Under Security Tap
-
-    Memory Protection -> Execution Prevention -> On
-
-    Secure Boot -> Secure Boot -> Off
-
-                         -> Platform Mode -> UserMode
-
-                         ->Secure Boot Mode -> Standard Mode
-
-- Under Startup Tap
-
-    UEFI/Legacy Boot ->UEFI Only
-
-       CSM Support -> No 
+In Display menu, set the following options:
+    
+-  `Boot Display Device -> Thinkpad LCD
+-  `Shared Display Priority -> USB Type-C
+-  `Total Garphics Memory ->512MB
+-  `Boot Time Extension -> Disabled
 	   
-- Under Thunderbolt menu
-
-    Thunderbolt BIOS Assist Mode`-> UEFI Only
-   
-    Wake by Thunderbolt(TM) -> No
-   
-    Security Level`-> No
-   
-    Support in Pre Boot Environment > Thunderbolt(TM) device`-> No
    
 ## Working:
 
