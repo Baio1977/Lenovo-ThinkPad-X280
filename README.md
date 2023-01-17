@@ -289,11 +289,6 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
                                     Name (_STR, Unicode ("Thunderbolt"))  // _STR: Description String
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                                    {
-                                        Return (0x0F)
-                                    }
-
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
                                         Return (Zero)
@@ -547,16 +542,6 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                                    {
-                                        Return (0x0F)
-                                    }
-
-                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                    {
-                                        Return (Zero)
-                                    }
-
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                                     {
                                         Return (Package (0x02)
@@ -614,11 +599,6 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                     Device (RHUB)
                                     {
                                         Name (_ADR, Zero)  // _ADR: Address
-                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                        {
-                                            Return (Zero)
-                                        }
-
                                         Device (HSP1)
                                         {
                                             Name (_ADR, One)  // _ADR: Address
