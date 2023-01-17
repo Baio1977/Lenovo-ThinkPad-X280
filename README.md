@@ -56,14 +56,13 @@ In Thunderbolt menu, set the following options:
 -  `Wake by Thunderbolt(TM) 3`: **No**
 -  `Security Level`: **No**
 -  `Support in Pre Boot Environment > Thunderbolt(TM) device`: **No**
-- Under Config Tap
 
 In Display menu, set the following options:
     
--  `Boot Display Device -> Thinkpad LCD
--  `Shared Display Priority -> USB Type-C
--  `Total Garphics Memory ->512MB
--  `Boot Time Extension -> Disabled
+-  `Boot Display Device` : **Thinkpad LCD**
+-  `Shared Display Priority` : **USB Type-C**
+-  `Total Garphics Memory` : **512MB**
+-  `Boot Time Extension` : **Disabled**
 	   
    
 ## Working:
