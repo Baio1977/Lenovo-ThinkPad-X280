@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLNmW9Ow.aml, Mon Jan 16 06:54:57 2023
+ * Disassembly of iASLuHs8kb.aml, Tue Jan 17 15:11:40 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000E24 (3620)
+ *     Length           0x00000EBE (3774)
  *     Revision         0x02
- *     Checksum         0x2B
+ *     Checksum         0x59
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280"
  *     OEM Revision     0x00000000 (0)
@@ -26,23 +26,14 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
     External (_SB_.PCI0.LPCB, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__.AC__, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC__.BAT0._HID, IntObj)
-    External (_SB_.PCI0.LPCB.EC__.BAT1._HID, IntObj)
-    External (_SB_.PCI0.LPCB.EC__.HFNI, FieldUnitObj)
-    External (_SB_.PCI0.LPCB.EC__.HFSP, FieldUnitObj)
-    External (_SB_.PCI0.LPCB.EC__.HIID, FieldUnitObj)
     External (_SB_.PCI0.LPCB.EC__.HKEY, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC__.VRST, FieldUnitObj)
-    External (_SB_.PCI0.LPCB.KBD_, DeviceObj)
     External (_SB_.PCI0.RP01, DeviceObj)
     External (_SB_.PCI0.RP01.HRUS, DeviceObj)
     External (_SB_.PCI0.RP01.PXSX, DeviceObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
     External (HPTE, FieldUnitObj)
-    External (HRUS, IntObj)
     External (LNUX, IntObj)
     External (OSYS, IntObj)
-    External (PXSX, DeviceObj)
     External (WNTF, IntObj)
     External (XPRW, MethodObj)    // 2 Arguments
 
@@ -337,37 +328,42 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                             {
-                                Local0 = Package (0x0A)
-                                    {
-                                        "AAPL,slot-name", 
-                                        Buffer (0x0C)
+                                If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                                {
+                                    Local0 = Package (0x0A)
                                         {
-                                            "Thunderbolt"
-                                        }, 
+                                            "AAPL,slot-name", 
+                                            Buffer (0x0C)
+                                            {
+                                                "Thunderbolt"
+                                            }, 
 
-                                        "built-in", 
-                                        Buffer (One)
-                                        {
-                                             0x00                                             // .
-                                        }, 
+                                            "built-in", 
+                                            Buffer (One)
+                                            {
+                                                 0x00                                             // .
+                                            }, 
 
-                                        "model", 
-                                        Buffer (0x45)
-                                        {
-                                            "JHL6240 Thunderbolt 3 UPSB Bridge (Low Power) [Alpine Ridge LP 2016]"
-                                        }, 
+                                            "model", 
+                                            Buffer (0x45)
+                                            {
+                                                "JHL6240 Thunderbolt 3 UPSB Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                            }, 
 
-                                        "device_type", 
-                                        Buffer (0x0B)
-                                        {
-                                            "PCI bridge"
-                                        }, 
+                                            "device_type", 
+                                            Buffer (0x0B)
+                                            {
+                                                "PCI bridge"
+                                            }, 
 
-                                        "PCI-Thunderbolt", 
-                                        One
-                                    }
-                                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                                Return (Local0)
+                                            "PCI-Thunderbolt", 
+                                            One
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+
+                                Return (Zero)
                             }
 
                             Device (DSB0)
@@ -404,37 +400,42 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                 {
-                                    Local0 = Package (0x0A)
-                                        {
-                                            "AAPL,slot-name", 
-                                            Buffer (0x0C)
+                                    If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                                    {
+                                        Local0 = Package (0x0A)
                                             {
-                                                "Thunderbolt"
-                                            }, 
+                                                "AAPL,slot-name", 
+                                                Buffer (0x0C)
+                                                {
+                                                    "Thunderbolt"
+                                                }, 
 
-                                            "built-in", 
-                                            Buffer (One)
-                                            {
-                                                 0x00                                             // .
-                                            }, 
+                                                "built-in", 
+                                                Buffer (One)
+                                                {
+                                                     0x00                                             // .
+                                                }, 
 
-                                            "model", 
-                                            Buffer (0x45)
-                                            {
-                                                "JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]"
-                                            }, 
+                                                "model", 
+                                                Buffer (0x45)
+                                                {
+                                                    "JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                                }, 
 
-                                            "device_type", 
-                                            Buffer (0x0B)
-                                            {
-                                                "PCI bridge"
-                                            }, 
+                                                "device_type", 
+                                                Buffer (0x0B)
+                                                {
+                                                    "PCI bridge"
+                                                }, 
 
-                                            "PCIHotplugCapable", 
-                                            Zero
-                                        }
-                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                                    Return (Local0)
+                                                "PCIHotplugCapable", 
+                                                Zero
+                                            }
+                                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                        Return (Local0)
+                                    }
+
+                                    Return (Zero)
                                 }
 
                                 Device (NHI0)
@@ -453,7 +454,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                     {
-                                        Local0 = Package (0x19)
+                                        Local0 = Package (0x1B)
                                             {
                                                 "AAPL,slot-name", 
                                                 Buffer (0x0C)
@@ -506,6 +507,21 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                     /* 0018 */  0x03, 0x03, 0x02, 0x00, 0x01, 0x00, 0x02, 0x00   // ........
                                                 }, 
 
+                                                "pathcr", 
+                                                Buffer (0x50)
+                                                {
+                                                    /* 0000 */  0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0008 */  0x00, 0x00, 0x07, 0x00, 0x10, 0x00, 0x10, 0x00,  // ........
+                                                    /* 0010 */  0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0018 */  0x00, 0x00, 0x07, 0x00, 0x10, 0x00, 0x10, 0x00,  // ........
+                                                    /* 0020 */  0x01, 0x00, 0x00, 0x00, 0x0B, 0x00, 0x0E, 0x00,  // ........
+                                                    /* 0028 */  0x0E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0030 */  0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0038 */  0x00, 0x00, 0x04, 0x00, 0x02, 0x00, 0x01, 0x00,  // ........
+                                                    /* 0040 */  0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                                                    /* 0048 */  0x00, 0x00, 0x07, 0x00, 0x02, 0x00, 0x01, 0x00   // ........
+                                                }, 
+
                                                 "linkDetails", 
                                                 Buffer (0x08)
                                                 {
@@ -518,12 +534,10 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                      0x03, 0x00, 0x00, 0x00                           // ....
                                                 }, 
 
-                                                "ThunderboltUUID", 
-                                                ToUUID ("95e6bcfa-5a4a-5f81-b3d2-f0e4bd35cf1e") /* Unknown UUID */, 
                                                 "sscOffset", 
                                                 Buffer (0x02)
                                                 {
-                                                     0x00, 0x00                                       // ..
+                                                     0x00, 0x07                                       // ..
                                                 }, 
 
                                                 "TBTDPLowToHigh", 
@@ -532,6 +546,8 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                      0x01, 0x00, 0x00, 0x00                           // ....
                                                 }, 
 
+                                                "ThunderboltUUID", 
+                                                ToUUID ("95e6bcfa-5a4a-5f81-b3d2-f0e4bd35cf1e") /* Unknown UUID */, 
                                                 "power-save", 
                                                 One, 
                                                 Buffer (One)
@@ -548,6 +564,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                             Device (DSB1)
                             {
                                 Name (_ADR, 0x00010000)  // _ADR: Address
+                                Name (_SUN, One)  // _SUN: Slot User Number
                                 OperationRegion (A1E0, PCI_Config, Zero, 0x40)
                                 Field (A1E0, ByteAcc, NoLock, Preserve)
                                 {
@@ -560,6 +577,45 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     Offset (0x1E), 
                                         ,   13, 
                                     MABT,   1
+                                }
+
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
                                 }
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
@@ -575,6 +631,21 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                 {
                                     Return (Zero)
+                                }
+
+                                Device (UPS0)
+                                {
+                                    Name (_ADR, Zero)  // _ADR: Address
+                                    OperationRegion (ARE0, PCI_Config, Zero, 0x04)
+                                    Field (ARE0, ByteAcc, NoLock, Preserve)
+                                    {
+                                        AVND,   16
+                                    }
+
+                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                    {
+                                        Return (One)
+                                    }
                                 }
                             }
 
@@ -612,13 +683,18 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                 {
-                                    Local0 = Package (0x02)
-                                        {
-                                            "PCIHotplugCapable", 
-                                            Zero
-                                        }
-                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                                    Return (Local0)
+                                    If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                                    {
+                                        Local0 = Package (0x02)
+                                            {
+                                                "PCIHotplugCapable", 
+                                                Zero
+                                            }
+                                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                        Return (Local0)
+                                    }
+
+                                    Return (Zero)
                                 }
 
                                 Device (XHC2)
