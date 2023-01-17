@@ -732,7 +732,8 @@ TB3 Patch ACPI
                 }
             }
         }
-Method (DTGP, 5, NotSerialized)
+
+        Method (DTGP, 5, NotSerialized)
         {
             If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
             {
