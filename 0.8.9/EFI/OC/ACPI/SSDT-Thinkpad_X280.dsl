@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLuHs8kb.aml, Tue Jan 17 15:11:40 2023
+ * Disassembly of iASL6Bzq0k.aml, Thu Jan 19 17:57:14 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000EBE (3774)
+ *     Length           0x00000F31 (3889)
  *     Revision         0x02
- *     Checksum         0x59
+ *     Checksum         0xA7
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280"
  *     OEM Revision     0x00000000 (0)
@@ -20,7 +20,6 @@
  */
 DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 {
-    External (_PR_.PR00, ProcessorObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
     External (_SB_.PCI0.LPCB, DeviceObj)
@@ -30,9 +29,12 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
     External (_SB_.PCI0.RP01, DeviceObj)
     External (_SB_.PCI0.RP01.HRUS, DeviceObj)
     External (_SB_.PCI0.RP01.PXSX, DeviceObj)
+    External (_SB_.PCI0.RP01.UPSB.DSB0.NHI0, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
+    External (ADBG, MethodObj)    // 1 Arguments
     External (HPTE, FieldUnitObj)
     External (LNUX, IntObj)
+    External (NOHP, IntObj)
     External (OSYS, IntObj)
     External (WNTF, IntObj)
     External (XPRW, MethodObj)    // 2 Arguments
@@ -47,27 +49,24 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
             OSYS = 0x07DF
         }
 
-        Scope (_PR)
+        Scope (_GPE)
         {
-            Scope (PR00)
+            Method (NTFY, 1, Serialized)
             {
                 If (_OSI ("Darwin"))
                 {
-                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    ADBG ("NTFY")
+                    If ((NOHP == One))
                     {
-                        If ((Arg2 == Zero))
+                        Switch (ToInteger (Arg0))
                         {
-                            Return (Buffer (One)
+                            Case (One)
                             {
-                                 0x03                                             // .
-                            })
-                        }
+                                ADBG ("Notify RP01")
+                                Notify (\_SB.PCI0.RP01.UPSB.DSB0.NHI0, Zero) // Bus Check
+                            }
 
-                        Return (Package (0x02)
-                        {
-                            "plugin-type", 
-                            One
-                        })
+                        }
                     }
                 }
             }
