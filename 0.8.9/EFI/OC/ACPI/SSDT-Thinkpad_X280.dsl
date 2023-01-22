@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASL6Bzq0k.aml, Thu Jan 19 17:57:14 2023
+ * Disassembly of iASLV63EwF.aml, Sun Jan 22 12:12:02 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000F31 (3889)
+ *     Length           0x00001150 (4432)
  *     Revision         0x02
- *     Checksum         0xA7
+ *     Checksum         0x26
  *     OEM ID           "Hack"
  *     OEM Table ID     "X280"
  *     OEM Revision     0x00000000 (0)
@@ -20,6 +20,8 @@
  */
 DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 {
+    External (_GPE.XL27, MethodObj)    // 0 Arguments
+    External (_GPE.XTFY, MethodObj)    // 1 Arguments
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
     External (_SB_.PCI0.LPCB, DeviceObj)
@@ -69,7 +71,20 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                         }
                     }
                 }
+
+                Return (\_GPE.XTFY (Arg0))
             }
+
+            Method (_L27, 0, NotSerialized)  // _Lxx: Level-Triggered GPE, xx=0x00-0xFF
+            {
+                If (_OSI ("Darwin"))
+                {
+                    ADBG ("-TBT_PCIE_WAKE")
+                    Notify (\_SB.PCI0.RP01.UPSB.DSB0.NHI0, 0x02) // Device Wake
+                }
+            }
+
+            Return (\_GPE.XL27 ())
         }
 
         Scope (_SB)
@@ -310,6 +325,45 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                 MABT,   1
                             }
 
+                            OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                            Field (A1E1, ByteAcc, NoLock, Preserve)
+                            {
+                                Offset (0x01), 
+                                Offset (0x02), 
+                                Offset (0x04), 
+                                Offset (0x08), 
+                                Offset (0x0A), 
+                                    ,   5, 
+                                TPEN,   1, 
+                                Offset (0x0C), 
+                                SSPD,   4, 
+                                    ,   16, 
+                                LACR,   1, 
+                                Offset (0x10), 
+                                    ,   4, 
+                                LDIS,   1, 
+                                LRTN,   1, 
+                                Offset (0x12), 
+                                CSPD,   4, 
+                                CWDT,   6, 
+                                    ,   1, 
+                                LTRN,   1, 
+                                    ,   1, 
+                                LACT,   1, 
+                                Offset (0x14), 
+                                Offset (0x30), 
+                                TSPD,   4
+                            }
+
+                            OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                            Field (A1E2, ByteAcc, NoLock, Preserve)
+                            {
+                                Offset (0x01), 
+                                Offset (0x02), 
+                                Offset (0x04), 
+                                PSTA,   2
+                            }
+
                             Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                             {
                                 Return (SECB) /* \_SB_.PCI0.RP01.UPSB.SECB */
@@ -382,6 +436,50 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     MABT,   1
                                 }
 
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
+                                }
+
+                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                {
+                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
+                                }
+
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
                                 {
                                     Return (0x0F)
@@ -390,11 +488,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                 {
                                     Return (Zero)
-                                }
-
-                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
-                                {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
                                 }
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -441,11 +534,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
                                     Name (_STR, Unicode ("Thunderbolt"))  // _STR: Description String
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
-                                    {
-                                        Return (0x0F)
-                                    }
-
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
                                         Return (Zero)
@@ -480,21 +568,24 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                                 }, 
 
                                                 "ThunderboltDROM", 
-                                                Buffer (0x65)
+                                                Buffer (0x80)
                                                 {
-                                                    /* 0000 */  0x63, 0x00, 0x06, 0xBB, 0xAD, 0xA2, 0x93, 0x78,  // c......x
-                                                    /* 0008 */  0x2D, 0xF4, 0x15, 0x15, 0x66, 0x01, 0x58, 0x00,  // -...f.X.
-                                                    /* 0010 */  0x01, 0x00, 0x10, 0x00, 0x01, 0x00, 0x08, 0x81,  // ........
+                                                    /* 0000 */  0x88, 0x00, 0x11, 0x11, 0x11, 0x11, 0x11, 0x00,  // ........
+                                                    /* 0008 */  0x00, 0x3A, 0xFF, 0x44, 0x6F, 0x01, 0x73, 0x00,  // .:.Do.s.
+                                                    /* 0010 */  0x01, 0x00, 0x0D, 0x00, 0x01, 0x00, 0x08, 0x81,  // ........
                                                     /* 0018 */  0x80, 0x02, 0x80, 0x00, 0x00, 0x00, 0x08, 0x82,  // ........
                                                     /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x08, 0x83,  // ........
                                                     /* 0028 */  0x80, 0x04, 0x80, 0x01, 0x00, 0x00, 0x08, 0x84,  // ........
-                                                    /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x05, 0x85,  // ........
-                                                    /* 0038 */  0x09, 0x01, 0x00, 0x05, 0x86, 0x09, 0x01, 0x00,  // ........
-                                                    /* 0040 */  0x02, 0x87, 0x03, 0x88, 0x20, 0x03, 0x89, 0x80,  // .... ...
-                                                    /* 0048 */  0x02, 0xCA, 0x02, 0xCB, 0x12, 0x01, 0x4C, 0x65,  // ......Le
-                                                    /* 0050 */  0x6E, 0x6F, 0x76, 0x6F, 0x20, 0x54, 0x68, 0x69,  // novo Thi
-                                                    /* 0058 */  0x6E, 0x6B, 0x70, 0x61, 0x64, 0x00, 0x07, 0x02,  // nkpad...
-                                                    /* 0060 */  0x58, 0x32, 0x38, 0x30, 0x00                     // X280.
+                                                    /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x02, 0x85,  // ........
+                                                    /* 0038 */  0x0B, 0x86, 0x20, 0x01, 0x00, 0x64, 0x00, 0x00,  // .. ..d..
+                                                    /* 0040 */  0x00, 0x00, 0x00, 0x03, 0x87, 0x80, 0x05, 0x88,  // ........
+                                                    /* 0048 */  0x50, 0x40, 0x00, 0x05, 0x89, 0x50, 0x00, 0x00,  // P@...P..
+                                                    /* 0050 */  0x05, 0x8A, 0x50, 0x00, 0x00, 0x05, 0x8B, 0x50,  // ..P....P
+                                                    /* 0058 */  0x40, 0x00, 0x17, 0x01, 0x4C, 0x65, 0x6E, 0x6F,  // @...Leno
+                                                    /* 0060 */  0x76, 0x6F, 0x20, 0x54, 0x68, 0x69, 0x6E, 0x6B,  // vo Think
+                                                    /* 0068 */  0x70, 0x61, 0x64, 0x20, 0x58, 0x32, 0x38, 0x30,  // pad X280
+                                                    /* 0070 */  0x00, 0x0F, 0x02, 0x41, 0x6C, 0x70, 0x69, 0x6E,  // ...Alpin
+                                                    /* 0078 */  0x65, 0x20, 0x52, 0x69, 0x64, 0x67, 0x65, 0x00   // e Ridge.
                                                 }, 
 
                                                 "ThunderboltConfig", 
@@ -665,6 +756,45 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     MABT,   1
                                 }
 
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
+                                }
+
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                                 {
                                     Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB2.SECB */
@@ -699,14 +829,19 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
-                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                    Name (SDPC, Zero)
+                                    OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                    Field (A1E0, ByteAcc, NoLock, Preserve)
                                     {
-                                        Return (0x0F)
-                                    }
-
-                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                    {
-                                        Return (Zero)
+                                        AVND,   32, 
+                                        BMIE,   3, 
+                                        Offset (0x18), 
+                                        PRIB,   8, 
+                                        SECB,   8, 
+                                        SUBB,   8, 
+                                        Offset (0x1E), 
+                                            ,   13, 
+                                        MABT,   1
                                     }
 
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
@@ -766,11 +901,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     Device (RHUB)
                                     {
                                         Name (_ADR, Zero)  // _ADR: Address
-                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
-                                        {
-                                            Return (Zero)
-                                        }
-
                                         Device (HSP1)
                                         {
                                             Name (_ADR, One)  // _ADR: Address
