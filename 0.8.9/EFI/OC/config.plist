@@ -14,32 +14,9 @@
                     <key>Path</key>
                     <string>SSDT-Thinkpad_X280.aml</string>
                 </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string></string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>DMAR_Mod.aml</string>
-                </dict>
             </array>
             <key>Delete</key>
-            <array>
-                <dict>
-                    <key>All</key>
-                    <false/>
-                    <key>Comment</key>
-                    <string>SSDT-DMAR Disable</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RE1BUg==</data>
-                </dict>
-            </array>
+            <array/>
             <key>Patch</key>
             <array>
                 <dict>
@@ -132,6 +109,36 @@
                     <key>TableSignature</key>
                     <data></data>
                 </dict>
+                <dict>
+                    <key>Base</key>
+                    <string></string>
+                    <key>BaseSkip</key>
+                    <integer>0</integer>
+                    <key>Comment</key>
+                    <string>Change Method (_L27,0,N) to XL27</string>
+                    <key>Count</key>
+                    <integer>0</integer>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Find</key>
+                    <data>X0wyNw==</data>
+                    <key>Limit</key>
+                    <integer>0</integer>
+                    <key>Mask</key>
+                    <data></data>
+                    <key>OemTableId</key>
+                    <data></data>
+                    <key>Replace</key>
+                    <data>WEwyNw==</data>
+                    <key>ReplaceMask</key>
+                    <data></data>
+                    <key>Skip</key>
+                    <integer>0</integer>
+                    <key>TableLength</key>
+                    <integer>0</integer>
+                    <key>TableSignature</key>
+                    <data></data>
+                </dict>
             </array>
             <key>Quirks</key>
             <dict>
@@ -203,24 +210,6 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key>#PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)</key>
-                <dict>
-                    <key>AAPL,slot-name</key>
-                    <string>Internal@0,28,0/0,0/2,0</string>
-                    <key>device_type</key>
-                    <string>PCI bridge</string>
-                    <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 DSB2 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
-                </dict>
-                <key>#PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)/Pci(0x0,0x0)</key>
-                <dict>
-                    <key>AAPL,slot-name</key>
-                    <string>Internal@0,28,0/0,0/2,0/0,0</string>
-                    <key>device_type</key>
-                    <string>USB controller</string>
-                    <key>model</key>
-                    <string>JHL6240 Thunderbolt 3 XHC2 Controller (Low Power) [Alpine Ridge LP 2016]</string>
-                </dict>
                 <key>PciRoot(0x0)/Pci(0x0,0x0)</key>
                 <dict>
                     <key>AAPL,slot-name</key>
@@ -301,6 +290,24 @@
                     <string>PCI bridge</string>
                     <key>model</key>
                     <string>JHL6240 Thunderbolt 3 DSB1 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
+                </dict>
+                <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/2,0</string>
+                    <key>device_type</key>
+                    <string>PCI bridge</string>
+                    <key>model</key>
+                    <string>JHL6240 Thunderbolt 3 DSB2 Bridge (Low Power) [Alpine Ridge LP 2016]</string>
+                </dict>
+                <key>PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)/Pci(0x2,0x0)/Pci(0x0,0x0)</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal@0,28,0/0,0/2,0/0,0</string>
+                    <key>device_type</key>
+                    <string>USB controller</string>
+                    <key>model</key>
+                    <string>JHL6240 Thunderbolt 3 XHC2 Controller (Low Power) [Alpine Ridge LP 2016]</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1C,0x2)</key>
                 <dict>
@@ -864,13 +871,67 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
-                    <string>IOElectrify.kext</string>
+                    <string>VoodooI2C.kext/Contents/PlugIns/VoodooGPIO.kext</string>
                     <key>Comment</key>
-                    <string>V1.0.0</string>
+                    <string>V1.1</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
-                    <string>Contents/MacOS/IOElectrify</string>
+                    <string>Contents/MacOS/VoodooGPIO</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>VoodooI2C.kext/Contents/PlugIns/VoodooI2CServices.kext</string>
+                    <key>Comment</key>
+                    <string>V1</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/VoodooI2CServices</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>VoodooI2C.kext</string>
+                    <key>Comment</key>
+                    <string>V2.7.1</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/VoodooI2C</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>VoodooI2CHID.kext</string>
+                    <key>Comment</key>
+                    <string>V1</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/VoodooI2CHID</string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -967,7 +1028,7 @@
                 <key>CustomSMBIOSGuid</key>
                 <true/>
                 <key>DisableIoMapper</key>
-                <false/>
+                <true/>
                 <key>DisableLinkeditJettison</key>
                 <true/>
                 <key>DisableRtcChecksum</key>
