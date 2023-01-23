@@ -184,15 +184,15 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                             }, 
 
                                             "model", 
-                                            Buffer (0x45)
+                                            Buffer (0x41)
                                             {
-                                                "JHL6240 Thunderbolt 3 UPSB Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                                "Intel JHL6240 Alpine Ridge Thunderbolt 3 UPSB Bridge (Low Power)"
                                             }, 
 
                                             "device_type", 
                                             Buffer (0x0B)
                                             {
-                                                "PCI bridge"
+                                                "PCI Bridge"
                                             }, 
 
                                             "PCI-Thunderbolt", 
@@ -222,6 +222,11 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                     MABT,   1
                                 }
 
+                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                {
+                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
+                                }
+
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
                                 {
                                     Return (0x0F)
@@ -230,11 +235,6 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                 {
                                     Return (Zero)
-                                }
-
-                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
-                                {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
                                 }
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -256,15 +256,15 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x45)
+                                                Buffer (0x41)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB0 Bridge (Low Power)"
                                                 }, 
 
                                                 "device_type", 
                                                 Buffer (0x0B)
                                                 {
-                                                    "PCI bridge"
+                                                    "PCI Bridge"
                                                 }, 
 
                                                 "PCIHotplugCapable", 
@@ -303,15 +303,15 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x3E)
+                                                Buffer (0x3A)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 NHI0 (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 NHI0 (Low Power)"
                                                 }, 
 
                                                 "device_type", 
                                                 Buffer (0x12)
                                                 {
-                                                    "System peripheral"
+                                                    "System Peripheral"
                                                 }, 
 
                                                 "ThunderboltDROM", 
@@ -467,6 +467,32 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                     Return (Zero)
                                 }
 
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x06)
+                                        {
+                                            "AAPL,slot-name", 
+                                            Buffer (0x0C)
+                                            {
+                                                "Thunderbolt"
+                                            }, 
+
+                                            "model", 
+                                            Buffer (0x41)
+                                            {
+                                                "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB1 Bridge (Low Power)"
+                                            }, 
+
+                                            "device_type", 
+                                            Buffer (0x0B)
+                                            {
+                                                "PCI Bridge"
+                                            }
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+
                                 Device (UPS0)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
@@ -519,8 +545,26 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                 {
                                     If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
                                     {
-                                        Local0 = Package (0x02)
+                                        Local0 = Package (0x08)
                                             {
+                                                "AAPL,slot-name", 
+                                                Buffer (0x0C)
+                                                {
+                                                    "Thunderbolt"
+                                                }, 
+
+                                                "model", 
+                                                Buffer (0x41)
+                                                {
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB2 Bridge (Low Power)"
+                                                }, 
+
+                                                "device_type", 
+                                                Buffer (0x0B)
+                                                {
+                                                    "PCI Bridge"
+                                                }, 
+
                                                 "PCIHotplugCapable", 
                                                 Zero
                                             }
@@ -548,9 +592,9 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                         Local0 = Package (0x10)
                                             {
                                                 "AAPL,slot-name", 
-                                                Buffer (0x11)
+                                                Buffer (0x0C)
                                                 {
-                                                    "Thunderbolt-XHC2"
+                                                    "Thunderbolt"
                                                 }, 
 
                                                 "built-in", 
@@ -566,9 +610,9 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x53)
+                                                Buffer (0x47)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 USB 3.1 [XHC2] Controller (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 Type C Controller (Low Power)"
                                                 }, 
 
                                                 "device_type", 
