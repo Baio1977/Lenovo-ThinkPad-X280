@@ -1,23 +1,3 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLLdiOet.aml, Tue Jan 17 18:21:23 2023
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x00000A1A (2586)
- *     Revision         0x02
- *     Checksum         0x94
- *     OEM ID           "Hack"
- *     OEM Table ID     "X280TB3"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
- */
 DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
@@ -101,15 +81,15 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                             }, 
 
                                             "model", 
-                                            Buffer (0x45)
+                                            Buffer (0x41)
                                             {
-                                                "JHL6240 Thunderbolt 3 UPSB Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                                "Intel JHL6240 Alpine Ridge Thunderbolt 3 UPSB Bridge (Low Power)"
                                             }, 
 
                                             "device_type", 
                                             Buffer (0x0B)
                                             {
-                                                "PCI bridge"
+                                                "PCI Bridge"
                                             }, 
 
                                             "PCI-Thunderbolt", 
@@ -139,6 +119,11 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                     MABT,   1
                                 }
 
+                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                {
+                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
+                                }
+
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
                                 {
                                     Return (0x0F)
@@ -147,11 +132,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                 {
                                     Return (Zero)
-                                }
-
-                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
-                                {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
                                 }
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -173,15 +153,15 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x45)
+                                                Buffer (0x41)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 DSB0 Bridge (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB0 Bridge (Low Power)"
                                                 }, 
 
                                                 "device_type", 
                                                 Buffer (0x0B)
                                                 {
-                                                    "PCI bridge"
+                                                    "PCI Bridge"
                                                 }, 
 
                                                 "PCIHotplugCapable", 
@@ -220,15 +200,15 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x3E)
+                                                Buffer (0x3A)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 NHI0 (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 NHI0 (Low Power)"
                                                 }, 
 
                                                 "device_type", 
                                                 Buffer (0x12)
                                                 {
-                                                    "System peripheral"
+                                                    "System Peripheral"
                                                 }, 
 
                                                 "ThunderboltDROM", 
@@ -384,6 +364,32 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                     Return (Zero)
                                 }
 
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x06)
+                                        {
+                                            "AAPL,slot-name", 
+                                            Buffer (0x0C)
+                                            {
+                                                "Thunderbolt"
+                                            }, 
+
+                                            "model", 
+                                            Buffer (0x41)
+                                            {
+                                                "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB1 Bridge (Low Power)"
+                                            }, 
+
+                                            "device_type", 
+                                            Buffer (0x0B)
+                                            {
+                                                "PCI Bridge"
+                                            }
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+
                                 Device (UPS0)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
@@ -436,8 +442,26 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                 {
                                     If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
                                     {
-                                        Local0 = Package (0x02)
+                                        Local0 = Package (0x08)
                                             {
+                                                "AAPL,slot-name", 
+                                                Buffer (0x0C)
+                                                {
+                                                    "Thunderbolt"
+                                                }, 
+
+                                                "model", 
+                                                Buffer (0x41)
+                                                {
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB2 Bridge (Low Power)"
+                                                }, 
+
+                                                "device_type", 
+                                                Buffer (0x0B)
+                                                {
+                                                    "PCI Bridge"
+                                                }, 
+
                                                 "PCIHotplugCapable", 
                                                 Zero
                                             }
@@ -465,9 +489,9 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                         Local0 = Package (0x10)
                                             {
                                                 "AAPL,slot-name", 
-                                                Buffer (0x11)
+                                                Buffer (0x0C)
                                                 {
-                                                    "Thunderbolt-XHC2"
+                                                    "Thunderbolt"
                                                 }, 
 
                                                 "built-in", 
@@ -483,9 +507,9 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280TB3", 0x00000000)
                                                 }, 
 
                                                 "model", 
-                                                Buffer (0x53)
+                                                Buffer (0x47)
                                                 {
-                                                    "JHL6240 Thunderbolt 3 USB 3.1 [XHC2] Controller (Low Power) [Alpine Ridge LP 2016]"
+                                                    "Intel JHL6240 Alpine Ridge Thunderbolt 3 Type C Controller (Low Power)"
                                                 }, 
 
                                                 "device_type", 
