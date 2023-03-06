@@ -26,7 +26,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
         {
             HPTE = Zero
             LNUX = One
-            WNTF = One
+            \WNTF = One
             OSYS = 0x07DF
         }
 
@@ -625,7 +625,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
 
                                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                 {
-                                    Local0 = Package (0x06)
+                                    Local0 = Package (0x08)
                                         {
                                             "AAPL,slot-name", 
                                             Buffer (0x0C)
@@ -643,7 +643,10 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                             Buffer (0x0B)
                                             {
                                                 "PCI Bridge"
-                                            }
+                                            }, 
+
+                                            "Thunderbolt Entry ID", 
+                                            0x0490
                                         }
                                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                                     Return (Local0)
@@ -661,6 +664,623 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
                                         Return (One)
+                                    }
+
+                                    Device (DSB0)
+                                    {
+                                        Name (_ADR, Zero)  // _ADR: Address
+                                        OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                        Field (A1E0, ByteAcc, NoLock, Preserve)
+                                        {
+                                            AVND,   32, 
+                                            BMIE,   3, 
+                                            Offset (0x18), 
+                                            PRIB,   8, 
+                                            SECB,   8, 
+                                            SUBB,   8, 
+                                            Offset (0x1E), 
+                                                ,   13, 
+                                            MABT,   1, 
+                                            Offset (0x3E), 
+                                                ,   6, 
+                                            SBRS,   1
+                                        }
+
+                                        Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                        {
+                                            Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB0.SECB */
+                                        }
+
+                                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                                        {
+                                            Return (0x0F)
+                                        }
+
+                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                        {
+                                            Return (One)
+                                        }
+
+                                        Device (DEV0)
+                                        {
+                                            Name (_ADR, Zero)  // _ADR: Address
+                                            Method (_STA, 0, NotSerialized)  // _STA: Status
+                                            {
+                                                Return (0x0F)
+                                            }
+
+                                            Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                            {
+                                                Return (One)
+                                            }
+                                        }
+                                    }
+
+                                    Device (DSB3)
+                                    {
+                                        Name (_ADR, 0x00030000)  // _ADR: Address
+                                        OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                        Field (A1E0, ByteAcc, NoLock, Preserve)
+                                        {
+                                            AVND,   32, 
+                                            BMIE,   3, 
+                                            Offset (0x18), 
+                                            PRIB,   8, 
+                                            SECB,   8, 
+                                            SUBB,   8, 
+                                            Offset (0x1E), 
+                                                ,   13, 
+                                            MABT,   1
+                                        }
+
+                                        Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                        {
+                                            Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.SECB */
+                                        }
+
+                                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                                        {
+                                            Return (0x0F)
+                                        }
+
+                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                        {
+                                            Return (One)
+                                        }
+
+                                        Device (UPS0)
+                                        {
+                                            Name (_ADR, Zero)  // _ADR: Address
+                                            OperationRegion (ARE0, PCI_Config, Zero, 0x04)
+                                            Field (ARE0, ByteAcc, NoLock, Preserve)
+                                            {
+                                                AVND,   16
+                                            }
+
+                                            Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                            {
+                                                Return (One)
+                                            }
+
+                                            Device (DSB0)
+                                            {
+                                                Name (_ADR, Zero)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1, 
+                                                    Offset (0x3E), 
+                                                        ,   6, 
+                                                    SBRS,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.UPS0.DSB0.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB3)
+                                            {
+                                                Name (_ADR, 0x00030000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.UPS0.DSB3.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+
+                                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                    {
+                                                        Return (One)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB4)
+                                            {
+                                                Name (_ADR, 0x00040000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.UPS0.DSB4.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+
+                                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                    {
+                                                        Return (One)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB5)
+                                            {
+                                                Name (_ADR, 0x00050000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.UPS0.DSB5.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+                                            }
+
+                                            Device (DSB6)
+                                            {
+                                                Name (_ADR, 0x00060000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB3.UPS0.DSB6.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    Device (DSB4)
+                                    {
+                                        Name (_ADR, 0x00040000)  // _ADR: Address
+                                        OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                        Field (A1E0, ByteAcc, NoLock, Preserve)
+                                        {
+                                            AVND,   32, 
+                                            BMIE,   3, 
+                                            Offset (0x18), 
+                                            PRIB,   8, 
+                                            SECB,   8, 
+                                            SUBB,   8, 
+                                            Offset (0x1E), 
+                                                ,   13, 
+                                            MABT,   1
+                                        }
+
+                                        Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                        {
+                                            Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.SECB */
+                                        }
+
+                                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                                        {
+                                            Return (0x0F)
+                                        }
+
+                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                        {
+                                            Return (One)
+                                        }
+
+                                        Device (UPS0)
+                                        {
+                                            Name (_ADR, Zero)  // _ADR: Address
+                                            OperationRegion (ARE0, PCI_Config, Zero, 0x04)
+                                            Field (ARE0, ByteAcc, NoLock, Preserve)
+                                            {
+                                                AVND,   16
+                                            }
+
+                                            Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                            {
+                                                Return (One)
+                                            }
+
+                                            Device (DSB0)
+                                            {
+                                                Name (_ADR, Zero)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1, 
+                                                    Offset (0x3E), 
+                                                        ,   6, 
+                                                    SBRS,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.UPS0.DSB0.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+
+                                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                    {
+                                                        Return (One)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB3)
+                                            {
+                                                Name (_ADR, 0x00030000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.UPS0.DSB3.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+
+                                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                    {
+                                                        Return (One)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB4)
+                                            {
+                                                Name (_ADR, 0x00040000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.UPS0.DSB4.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+
+                                                Device (DEV0)
+                                                {
+                                                    Name (_ADR, Zero)  // _ADR: Address
+                                                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                    {
+                                                        Return (0x0F)
+                                                    }
+
+                                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                    {
+                                                        Return (One)
+                                                    }
+                                                }
+                                            }
+
+                                            Device (DSB5)
+                                            {
+                                                Name (_ADR, 0x00050000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.UPS0.DSB5.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+                                            }
+
+                                            Device (DSB6)
+                                            {
+                                                Name (_ADR, 0x00060000)  // _ADR: Address
+                                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                                {
+                                                    AVND,   32, 
+                                                    BMIE,   3, 
+                                                    Offset (0x18), 
+                                                    PRIB,   8, 
+                                                    SECB,   8, 
+                                                    SUBB,   8, 
+                                                    Offset (0x1E), 
+                                                        ,   13, 
+                                                    MABT,   1
+                                                }
+
+                                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                                {
+                                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB4.UPS0.DSB6.SECB */
+                                                }
+
+                                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                                {
+                                                    Return (0x0F)
+                                                }
+
+                                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                                {
+                                                    Return (One)
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    Device (DSB5)
+                                    {
+                                        Name (_ADR, 0x00050000)  // _ADR: Address
+                                        OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                        Field (A1E0, ByteAcc, NoLock, Preserve)
+                                        {
+                                            AVND,   32, 
+                                            BMIE,   3, 
+                                            Offset (0x18), 
+                                            PRIB,   8, 
+                                            SECB,   8, 
+                                            SUBB,   8, 
+                                            Offset (0x1E), 
+                                                ,   13, 
+                                            MABT,   1
+                                        }
+
+                                        Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                        {
+                                            Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB5.SECB */
+                                        }
+
+                                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                                        {
+                                            Return (0x0F)
+                                        }
+
+                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                        {
+                                            Return (One)
+                                        }
+                                    }
+
+                                    Device (DSB6)
+                                    {
+                                        Name (_ADR, 0x00060000)  // _ADR: Address
+                                        OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                        Field (A1E0, ByteAcc, NoLock, Preserve)
+                                        {
+                                            AVND,   32, 
+                                            BMIE,   3, 
+                                            Offset (0x18), 
+                                            PRIB,   8, 
+                                            SECB,   8, 
+                                            SUBB,   8, 
+                                            Offset (0x1E), 
+                                                ,   13, 
+                                            MABT,   1
+                                        }
+
+                                        Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                        {
+                                            Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.UPS0.DSB6.SECB */
+                                        }
+
+                                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                                        {
+                                            Return (0x0F)
+                                        }
+
+                                        Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                        {
+                                            Return (One)
+                                        }
                                     }
                                 }
                             }
