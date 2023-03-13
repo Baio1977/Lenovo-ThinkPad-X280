@@ -60,7 +60,7 @@ In Thunderbolt menu, set the following options:
 In Display menu, set the following options:
     
 -  `Boot Display Device` : **Thinkpad LCD**
--  `Shared Display Priority` : **USB Type-C**
+-  `Shared Display Priority` : **HDMI**
 -  `Total Garphics Memory` : **512MB**
 -  `Boot Time Extension` : **Disabled**
 	   
