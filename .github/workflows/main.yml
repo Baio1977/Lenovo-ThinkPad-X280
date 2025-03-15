@@ -128,7 +128,7 @@ jobs:
          file: ./EFI.zip  # Make sure the file path matches
          tag: ${{ github.ref }}
          make_latest: false
-         release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
+         release_name: EFI Lenovo ThinkPad X280
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: false
