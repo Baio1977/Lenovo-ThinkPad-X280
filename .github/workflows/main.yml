@@ -93,10 +93,10 @@ jobs:
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
         cp ./OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
 
-    - name: Copy SSDT-X280.aml to EFI/OC/ACPI
+    - name: Copy SSDT-Thinkpad_X280.aml to EFI/OC/ACPI
       run: |
-        echo "Copying SSDT-X280.aml to EFI/OC/ACPI..."
-        cp ./OC/ACPI/SSDT-X280.aml ./EFI/OC/ACPI/
+        echo "Copying SSDT-Thinkpad_X280.aml to EFI/OC/ACPI..."
+        cp ./OC/ACPI/SSDT-Thinkpad_X280.aml ./EFI/OC/ACPI/
 
     - name: Clean up
       run: |
