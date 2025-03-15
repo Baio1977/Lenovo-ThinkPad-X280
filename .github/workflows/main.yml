@@ -119,3 +119,16 @@ jobs:
       with:
         name: Lenovo X280-EFI
         path: EFI.zip
+        
+    - name: Upload build
+      uses: svenstaro/upload-release-action@2.9.0
+      if: github.event_name != 'pull_request'
+      with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: ./EFI.zip  # Make sure the file path matches
+         tag: ${{ github.ref }}
+         make_latest: false
+         release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
+         body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
+         file_glob: true
+         overwrite: false
